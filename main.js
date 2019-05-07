@@ -3,14 +3,13 @@ const stateTemplate = Handlebars.compile(state);
 
 //Render Tempalte onload from URL Param
 $( document ).ready(function() {
- if (state) {
  const state = getUrlParameter('state')
+ if (state) {
  $('#state-select').val(state)
- renderState(state);
  $('#map').hide()
+ renderState(state);
 }
 else {
-	renderState(null)
 }
 
 })
@@ -42,16 +41,11 @@ $("#map-toggle").click(function() {
 
 //Render State Template
 function renderState(state){
-if(state) {
 $('#state-laws').html('<div class="center spinner"><i class="fas fa-circle-notch fa-spin"></i></div>')  
 $.getJSON( "https://reciprocal.naspovaluepoint.org/laws?state=" + state, function( data ) {
   const info = data.records
 	$('#state-laws').html(stateTemplate(info));
   });
-}
-else {
-	$('#state-laws').html('<p class="mt-3"> Please select a state from the dropdown or map to view reciprocal preference laws anf regulations.</p>')  
-}
 }
 
 //Helper to handle URLs
