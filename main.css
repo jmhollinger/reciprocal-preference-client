@@ -31,3 +31,13 @@ html,body {
     fill: #c33f39;
     pointer-events:all;
 }
+
+
+.btn-naspo-blue, .btn-naspo-blue:hover, .btn-naspo-blue:active, .btn-naspo-blue:visited {
+    background-color: #2f4f75;
+	color : #fff;
+}
+
+.contact-info{
+  margin : 0px;
+}
