@@ -3,9 +3,15 @@ const stateTemplate = Handlebars.compile(state);
 
 //Render Tempalte onload from URL Param
 $( document ).ready(function() {
+ if (state) {
  const state = getUrlParameter('state')
  $('#state-select').val(state)
  renderState(state);
+}
+else {
+	renderState(null)
+}
+
 })
 
 //Change URL on Dropdown Select
@@ -19,6 +25,7 @@ $( "#state-select" ).change(function() {
 //Change URL on Map Click
 $( ".state" ).click(function(e) {
 	let stateClick = e.target.attributes["data-state"].value
+	$('#state-select').val(stateClick)
 	let baseURL = window.location.href.split('?')[0]
 	window.history.pushState(baseURL, '', baseURL + '?state=' + stateClick);
 	renderState(stateClick)
@@ -26,11 +33,16 @@ $( ".state" ).click(function(e) {
 
 //Render State Template
 function renderState(state){
+if(state) {
 $('#state-laws').html('<div class="center spinner"><i class="fas fa-circle-notch fa-spin"></i></div>')  
 $.getJSON( "https://reciprocal.naspovaluepoint.org/laws?state=" + state, function( data ) {
   const info = data.records
 	$('#state-laws').html(stateTemplate(info));
   });
+}
+else {
+	$('#state-laws').html('<p class="mt-3"> Please select a state from the dropdown or map to view reciprocal preference laws anf regulations.</p>')  
+}
 }
 
 //Helper to handle URLs
