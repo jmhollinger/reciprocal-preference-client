@@ -1,0 +1,33 @@
+
+html,body {
+	font-family: font-family: 'Roboto', sans-serif !important;
+}
+
+.logo {
+  height : 100px;
+}
+.title {
+  margin-top:10px;
+  color: #2f4f75;
+  font-size: 3em;
+}
+
+.spinner {
+  color: #2f4f75;
+  font-size: 3.5em;
+}
+
+.center {
+  text-align: center;
+  padding: 10px;
+}
+.banner {
+  padding: 15px;
+  background : #c33f39;
+  color: #FFF;
+}
+
+.state:hover{
+    fill: #c33f39;
+    pointer-events:all;
+}
