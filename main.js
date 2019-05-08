@@ -16,11 +16,13 @@ else {
 
 //Change URL on Dropdown Select
 $( "#state-select" ).change(function() {
-	let stateChange = $(this).val();
+  let stateChange = $(this).val();
+  if(stateChange){
 	let baseURL = window.location.href.split('?')[0]
 	window.history.pushState(baseURL, '', baseURL + '?state=' + stateChange);
   $('#map').hide()
 	renderState(stateChange)
+}
 })
 
 //Change URL on Map Click
