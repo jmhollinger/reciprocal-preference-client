@@ -1,15 +1,16 @@
 const state = $("#stateTemplate").html();
 const stateTemplate = Handlebars.compile(state);
 
-//Render Tempalte onload from URL Param
+//Render Template onload from URL Param
 $( document ).ready(function() {
- const state = getUrlParameter('state')
+const state = getUrlParameter('state')
+
  if (state) {
  $('#state-select').val(state)
- $('#map').hide()
  renderState(state);
 }
 else {
+   $('#map').show()
 }
 
 })
@@ -43,11 +44,16 @@ $("#map-toggle").click(function() {
 
 //Render State Template
 function renderState(state){
-$('#state-laws').html('<div class="center spinner"><i class="fas fa-circle-notch fa-spin"></i></div>')  
-$.getJSON( "https://reciprocal.naspovaluepoint.org/laws?state=" + state, function( data ) {
-  const info = data.records
-	$('#state-laws').html(stateTemplate(info));
-  });
+$('#state-laws').html('<div class="center spinner"><i class="fas fa-circle-notch fa-spin"></i></div>') 
+$.ajax( "https://reciprocal.naspovaluepoint.org/v1/laws?state=" + state )
+  .done(function(data) {
+    const info = data.records
+    $('#state-laws').html(stateTemplate(info));
+  })
+  .fail(function() {
+    $('#state-laws').html('<div class="center"><p>We can\'t seem to locate the state you are looking for. Please make sure you have provided a valid state abbreviation.</p></div>')
+  })
+
 }
 
 //Helper to handle URLs
@@ -56,7 +62,7 @@ Handlebars.registerHelper('link', function(url) {
 
   if (url) {
   return new Handlebars.SafeString(
-    '<a target="_blank"href="' + link + '">More Information</>'
+    '<h6 class="card-subtitle mb-2 text-muted"><span class="font-weight-bold">Statute : </span><a class="card-link" target="_blank"href="' + link + '">View Statute</a></h6>'
   );
 }
 });
@@ -77,6 +83,14 @@ Handlebars.registerHelper('time_since', function(date) {
   );
 });
 
+//Helper for icons
+Handlebars.registerHelper('icon', function(boolean) {
+  var input = Handlebars.escapeExpression(boolean)
+  if (input === 'Yes') {return new Handlebars.SafeString('<i class="fas fa-check-circle text-success"></i>')}
+  else if (input === 'No') {return new Handlebars.SafeString('<i class="fas fa-times-circle text-danger"></i>')}
+  else {return null}
+});
+
 //Helper for boolean data
 Handlebars.registerHelper('true_false', function(boolean) {
   var input = Handlebars.escapeExpression(boolean)
@@ -95,7 +109,7 @@ Handlebars.registerHelper('contact', function(name, address, city, state, zip, e
   var input_email = Handlebars.escapeExpression(email)
   var input_phone = Handlebars.escapeExpression(phone)
 
-  let clean_name, clean_address, clean_email, clean_phone
+  let clean_name, clean_address, clean_email, clean_phone, clean_label
 
   if (input_name) {
     clean_name = '<p class="contact-info">' + input_name + '</p>'
@@ -125,7 +139,14 @@ Handlebars.registerHelper('contact', function(name, address, city, state, zip, e
     clean_phone = ''
   }
 
-return new Handlebars.SafeString(clean_name + clean_address + clean_email + clean_phone)
+  if(clean_name + clean_address + clean_email + clean_phone){
+    clean_label = '<h6 class="card-subtitle mb-2 text-muted"><span class="font-weight-bold">Contact : </span></h6>'
+  } 
+  else {
+    clean_label = ''
+  }
+
+return new Handlebars.SafeString(clean_label + clean_name + clean_address + clean_email + clean_phone)
 
 });
 
