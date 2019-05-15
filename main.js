@@ -10,7 +10,7 @@ const state = getUrlParameter('state')
  renderState(state);
 }
 else {
-   $('#map').show()
+   showMap()
 }
 
 })
@@ -21,7 +21,7 @@ $( "#state-select" ).change(function() {
   if(stateChange){
 	let baseURL = window.location.href.split('?')[0]
 	window.history.pushState(baseURL, '', baseURL + '?state=' + stateChange);
-  $('#map').hide()
+  hideMap()
 	renderState(stateChange)
 }
 })
@@ -32,15 +32,53 @@ $( ".state" ).click(function(e) {
 	$('#state-select').val(stateClick)
 	let baseURL = window.location.href.split('?')[0]
 	window.history.pushState(baseURL, '', baseURL + '?state=' + stateClick);
-  $('#map').hide()
+  hideMap()
 	renderState(stateClick)
 })
 
 //Toggle Map On/Off
-$("#map-toggle").click(function() { 
-    // assumes element with id='button'
-    $("#map").toggle();
-});
+function toggleMap (e){
+  var element = e;
+  if (element.getAttribute('data-show-map') === 'false') {
+    showMap()  
+  }
+  else {
+    element.setAttribute('data-show-map', 'false')
+    hideMap()
+  }
+}
+
+//Show Map
+function showMap(){
+    var element = document.getElementById('map-toggle');
+    element.setAttribute('data-show-map', 'true')
+    $('#map').slideDown(200)
+    element.innerHTML = 'Hide Map'
+}
+
+//Hide Map
+function hideMap(){
+    var element = document.getElementById('map-toggle');
+    element.setAttribute('data-show-map', 'false')
+    $('#map').slideUp(200)
+    element.innerHTML = 'Show Map'
+}
+
+//Toggle description.
+function toggleDescription (e){
+  var element = e.previousElementSibling
+  if (element.getAttribute('data-expanded') === 'false') {
+  element.setAttribute('data-expanded', 'true');
+  element.classList.remove("law-description-truncated");
+  element.classList.add("law-description-full");
+  e.innerHTML = 'Show Less';
+} else {
+  element.setAttribute('data-expanded', 'false');
+  element.classList.remove("law-description-full");
+  element.classList.add("law-description-truncated");
+  e.innerHTML = 'Show More';
+}
+};
 
 //Render State Template
 function renderState(state){
@@ -97,6 +135,20 @@ Handlebars.registerHelper('true_false', function(boolean) {
   if (input === 'true') {return new Handlebars.SafeString('Yes')}
   else if (input === 'false') {return new Handlebars.SafeString('No')}
   else {return null}
+});
+
+
+//Helper for law description
+Handlebars.registerHelper('description', function(desc) {
+  var input = Handlebars.escapeExpression(desc)
+  console.log(input.length)
+  if (input.length < 500) {
+    return '<p class="card-text law-description-full text-muted" data-expanded="true">' + desc + '</p>'
+  }
+  else {
+    return '<p class="card-text law-description-truncated text-muted" data-expanded="false">' + desc + '</p>' + 
+           '<button onclick="toggleDescription(this)"" class="btn btn-block btn-naspo-gray">Show More</button>'
+  }
 });
 
 //Helper for contact data

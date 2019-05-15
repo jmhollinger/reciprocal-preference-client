@@ -85,7 +85,7 @@
                     </select>
                 </div>
                 <div class="col-sm-6 form-group">
-                    <button id="map-toggle" class="form-control btn btn-naspo-blue btn-block">Toggle Map</button>
+                    <button onclick="toggleMap(this)" id="map-toggle" class="form-control btn btn-naspo-blue btn-block" data-show-map="false">Show Map</button>
                 </div>
             </div>
             <div id="map" class="hide">
@@ -228,6 +228,13 @@
             </div>
           </li>
           <li>
+          <li>
+            <div class="flex">
+              <div class="attr-icon"><i class="fas fa-file-alt text-muted"></i></div>
+              <div class="attr-label">Preference Regulations</div>
+              <div class="attr-value">{{law_count}}</div>
+            </div>
+          </li>
             <div class="flex">
               <div class="attr-icon"><i class="fas fa-calendar-check text-muted"></i></div>
               <div class="attr-label">Date Verified</div>
@@ -258,7 +265,7 @@
             {{{contact this.contact_name this.contact_address this.contact_city this.contact_state this.contact_zip this.contact_email this.contact_phone}}}
             </div>
             <div class="col-lg-8">
-            <p class="card-text line-break text-muted">{{this.description}}</p>
+            {{{description this.description}}}
           </div>
           </div>
         </div>

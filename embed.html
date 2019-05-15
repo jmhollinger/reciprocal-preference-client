@@ -76,11 +76,11 @@
                     </select>
                 </div>
                 <div class="col-sm-6 form-group">
-                    <button id="map-toggle" class="form-control btn btn-naspo-blue btn-block">Toggle Map</button>
+                    <button onclick="toggleMap(this)" id="map-toggle" class="form-control btn btn-naspo-blue btn-block" data-show-map="false">Show Map</button>
                 </div>
             </div>
             <div id="map" class="hide">
-                <svg viewBox="0 0 1280 800" class="mt-3 svg-map" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <svg viewBox="0 0 1280 800" class="mt-3 svg-map-ie svg-map" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                     <desc></desc>
                     <g>
                         <title>States</title>
@@ -222,6 +222,13 @@
             </div>
           </li>
           <li>
+          <li>
+            <div class="flex">
+              <div class="attr-icon"><i class="fas fa-file-alt text-muted"></i></div>
+              <div class="attr-label">Preference Regulations</div>
+              <div class="attr-value">{{law_count}}</div>
+            </div>
+          </li>
             <div class="flex">
               <div class="attr-icon"><i class="fas fa-calendar-check text-muted"></i></div>
               <div class="attr-label">Date Verified</div>
@@ -232,10 +239,10 @@
         <hr>
         <div class="row">
             <div class="col-md-9">
-                <p>If you have any comments or corrections, please contact us at <a href="mailto:reciprocal_preference@naspo.org?subject={{state.name}} Reciprocity">reciprocal_preference@naspo.org</a></p>
+                <p>If you have any comments or corrections, please contact us at <a href="mailto:reciprocal_preference@naspo.org?subject={{state.name}} Reciprocity">reciprocal@naspo.org</a></p>
             </div>
             <div class="col-md-3 text-right">
-                <a class="btn btn-block btn-naspo-blue" href="https://reciprocal.naspovaluepoint.org/v1/laws/export?state={{state.abbreviation}}">Download Data <i class="fas fa-file-download"></i></a>
+                <a class="btn btn-block btn-naspo-blue" href="https://reciprocal.naspovaluepoint.org/v1/laws/export?state={{state.abbreviation}}">Download <i class="fas fa-file-download"></i></a>
             </div>
         </div>
         
@@ -252,7 +259,7 @@
             {{{contact this.contact_name this.contact_address this.contact_city this.contact_state this.contact_zip this.contact_email this.contact_phone}}}
             </div>
             <div class="col-lg-8">
-            <p class="card-text line-break text-muted">{{this.description}}</p>
+            {{{description this.description}}}
           </div>
           </div>
         </div>

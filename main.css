@@ -1,14 +1,35 @@
 
-html,body {
+html,body{
 	font-family: 'Roboto', sans-serif !important;
 }
 
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none){
-  .svg-map{
-      width : 100%;
-      height : 500px;
-  }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+ 
+.svg-map{
+        width : 100%;
+        height : 150px;
 }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (min-width: 320px){
+ 
+.svg-map{
+        width : 100%;
+        height : 350px;
+}
+}
+
+
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) and (min-width: 768px){
+ 
+.svg-map{
+        width : 100%;
+        height : 650px;
+}
+}
+
 
 @supports not (-ms-high-contrast: none) {
    .svg-map {
@@ -59,9 +80,16 @@ display : none;
   }
 
 
-.line-break {
+.law-description-truncated {
   white-space: pre-line;
+  height: 6em;
+  overflow: hidden;
 } 
+
+.law-description-full {
+  white-space: pre-line;
+  height : auto;
+}
 
 .logo {
   height : 100px;
@@ -99,9 +127,33 @@ display : none;
 }
 
 
-.btn-naspo-blue, .btn-naspo-blue:hover, .btn-naspo-blue:active, .btn-naspo-blue:visited {
-    background-color: #2f4f75;
+.btn-naspo-blue, .btn-naspo-blue:active, .btn-naspo-blue:visited {
+  background-color: #2f4f75;
 	color : #fff;
+}
+
+.btn-naspo-blue:hover {
+  background-color: #49698F;
+  color : #fff;
+}
+
+.btn-naspo-red, .btn-naspo-red:active, .btn-naspo-red:visited {
+  background-color: #c33f39;
+  color : #fff;
+}
+
+.btn-naspo-red:hover {
+
+}
+
+.btn-naspo-gray, .btn-naspo-gray:active, .btn-naspo-gray:visited {
+  background-color: #6d6e71;
+  color : #fff;
+}
+
+.btn-naspo-gray:hover {
+  background-color: #87888B;
+  color : #fff;
 }
 
 .contact-info{
