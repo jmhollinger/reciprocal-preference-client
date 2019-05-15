@@ -6,7 +6,7 @@ $( document ).ready(function() {
 const state = getUrlParameter('state')
 
  if (state) {
- $('#state-select').val(state)
+ $('#state-select').val(state.toUpperCase())
  renderState(state);
 }
 else {
