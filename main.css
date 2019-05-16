@@ -38,6 +38,10 @@ html,body{
   }
 }
 
+.code {
+  white-space: pre;
+}
+
 .attr-list {
   list-style: none;
   text-indent: 0px;
