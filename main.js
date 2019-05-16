@@ -85,7 +85,10 @@ function renderState(state){
 $('#state-laws').html('<div class="center spinner"><i class="fas fa-circle-notch fa-spin"></i></div>') 
 $.ajax({
   "url" : "https://reciprocal.naspovaluepoint.org/v1/laws?state=" + state,
-  "cache" : false 
+  "headers" : {
+    "x-api-key" : "MeFUbMJQfn6HDsgA6IYgP3K8P8AyfbKp56MRc3OW"
+  },
+  "cache" : false
 })
   .done(function(data) {
     const info = data.records
