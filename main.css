@@ -125,6 +125,12 @@ display : none;
   color: #FFF;
 }
 
+.banner-blue {
+  padding: 15px;
+  background : #2f4f75;
+  color: #FFF;
+}
+
 .state:hover{
     fill: #c33f39;
     pointer-events:all;
