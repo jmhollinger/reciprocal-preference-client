@@ -83,7 +83,10 @@ function toggleDescription (e){
 //Render State Template
 function renderState(state){
 $('#state-laws').html('<div class="center spinner"><i class="fas fa-circle-notch fa-spin"></i></div>') 
-$.ajax( "https://reciprocal.naspovaluepoint.org/v1/laws?state=" + state )
+$.ajax({
+  "url" : "https://reciprocal.naspovaluepoint.org/v1/laws?state=" + state,
+  "cache" : false 
+})
   .done(function(data) {
     const info = data.records
     $('#state-laws').html(stateTemplate(info));
