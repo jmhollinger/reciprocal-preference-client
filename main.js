@@ -132,7 +132,7 @@ Handlebars.registerHelper('icon', function(boolean) {
   var input = Handlebars.escapeExpression(boolean)
   if (input === 'Yes') {return new Handlebars.SafeString('<i class="fas fa-check-circle text-success"></i>')}
   else if (input === 'No') {return new Handlebars.SafeString('<i class="fas fa-times-circle text-danger"></i>')}
-  else {return null}
+  else {return new Handlebars.SafeString('<i class="fas fa-circle text-muted"></i>')}
 });
 
 //Helper for boolean data
